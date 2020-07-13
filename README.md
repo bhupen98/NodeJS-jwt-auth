@@ -12,19 +12,19 @@
      
      const app = express();
      
-    app.post('/api/login',(req,res)=>{
+    app.post('/api/login',async (req,res)=>{
     
     //new user
-     const user= {
+     const payload= {
+        user:{
           id:'stdfggerwg454533t3t36',
-          username:'bhupen',
-          password:'password'
+          }
       }
-   
-     jwt.sign({user:user},'secret_Key',(err,token)=>{
-        res.json({
-          token:token
-            });
-         });
-       });    
+  
+     try{
+       const token =  await jwt.sign(payload,'secret_key',{expiresIn:'1hr})
+     } catch(err){
+      console.error(err)
+     }
+    
  ```
